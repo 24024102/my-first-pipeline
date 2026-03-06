@@ -25,4 +25,4 @@ jobs:
           context: 
           push: true 
         
-          tags: твой_логин_docker/my-first-pipeline:latest
+          tags: 24024102/my-first-pipeline:latest
