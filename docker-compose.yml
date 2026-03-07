@@ -1,0 +1,25 @@
+version: '3.8'
+secrets:
+  web:
+    image: 24024102/my-first-pipeline:latest
+    ports: 
+      - "80:80"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=mydatabase
+      - DB_USER=admin
+      - DB_PASSWORD=root
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+   
