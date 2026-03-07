@@ -1,5 +1,5 @@
 version: '3.8'
-secrets:
+service:
   web:
     image: 24024102/my-first-pipeline:latest
     ports: 
