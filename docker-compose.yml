@@ -5,7 +5,7 @@ services:
     ports:
      - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
       - web
   web:
@@ -40,7 +40,41 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-   
+  loctus:
+     image: locustio/locust
+     ports:
+      - "8089:8089"
+     volumes:
+      - ./locustfile.py:/mnt/locust/locustfile.py:ro
+     command: -f /mnt/locust/locustfile.py
+  
+  
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:0.47.0
+    ports:
+      - "8080:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+      - /deb/disk/:/dev/disk:ro
+    
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    
+  
+
 volumes:
   pgdata:
    
