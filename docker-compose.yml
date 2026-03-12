@@ -12,6 +12,7 @@ services:
     image: 24024102/my-first-pipeline:latest
     expose:
       - "80"
+    restart: always
     depends_on:
       - db
     environment:
@@ -64,7 +65,7 @@ services:
       - /var/run:/var/run:ro
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
-      - /deb/disk/:/dev/disk:ro
+      - /dev/disk/:/dev/disk:ro
     
   grafana:
     image: grafana/grafana
