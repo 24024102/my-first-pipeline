@@ -78,4 +78,4 @@ services:
 
 volumes:
   pgdata:
-   
+  # Final deploy attempt
